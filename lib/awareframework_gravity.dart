@@ -14,12 +14,12 @@ class GravitySensor extends AwareSensorCore {
   GravitySensor(GravitySensorConfig config):this.convenience(config);
   GravitySensor.convenience(config) : super(config){
     /// Set sensor method & event channels
-    super.setSensorChannels(_gravityMethod, _gravityStream);
+    super.setMethodChannel(_gravityMethod);
   }
 
   /// A sensor observer instance
-  Stream<Map<String,dynamic>> get onDataChanged {
-     return super.receiveBroadcastStream("on_data_changed").map((dynamic event) => Map<String,dynamic>.from(event));
+  Stream<Map<String,dynamic>> onDataChanged(String id){
+     return super.getBroadcastStream(_gravityStream, "on_data_changed", id).map((dynamic event) => Map<String,dynamic>.from(event));
   }
 }
 
@@ -58,7 +58,7 @@ class GravityCardState extends State<GravityCard> {
 
     super.initState();
     // set observer
-    widget.sensor.onDataChanged.listen((event) {
+    widget.sensor.onDataChanged("ui").listen((event) {
       setState((){
         if(event!=null){
           DateTime.fromMicrosecondsSinceEpoch(event['timestamp']);
@@ -85,6 +85,12 @@ class GravityCardState extends State<GravityCard> {
       title: "Gravity",
       sensor: widget.sensor
     );
+  }
+
+  @override
+  void dispose() {
+    widget.sensor.cancelBroadcastStream("ui");
+    super.dispose();
   }
 
 }

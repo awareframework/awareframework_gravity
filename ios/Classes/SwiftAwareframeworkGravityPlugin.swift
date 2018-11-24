@@ -30,12 +30,14 @@ public class SwiftAwareframeworkGravityPlugin: AwareFlutterPluginCore, FlutterPl
     }
 
     public static func register(with registrar: FlutterPluginRegistrar) {
+        let instance = SwiftAwareframeworkGravityPlugin()
         // add own channel
-        super.setChannels(with: registrar,
-                          instance: SwiftAwareframeworkGravityPlugin(),
-                          methodChannelName: "awareframework_gravity/method",
-                          eventChannelName: "awareframework_gravity/event")
-
+        super.setMethodChannel(with: registrar,
+                               instance: instance,
+                               channelName: "awareframework_gravity/method")
+        super.setEventChannels(with: registrar,
+                          instance: instance,
+                          channelNames: ["awareframework_gravity/event"] )
     }
 
     public func onDataChanged(data: GravityData) {
