@@ -22,6 +22,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     config = GravitySensorConfig()
+      ..frequency = 100
+      ..dbType = 1
       ..debug = true;
 
     sensor = new GravitySensor(config);
