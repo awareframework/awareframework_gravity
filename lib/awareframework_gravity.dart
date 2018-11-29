@@ -45,11 +45,17 @@ class GravitySensorConfig extends AwareSensorConfig{
 
 /// Make an AwareWidget
 class GravityCard extends StatefulWidget {
-  GravityCard({Key key, @required this.sensor, this.bufferSize=299, this.height=250.0}) : super(key: key);
+  GravityCard({Key key, @required this.sensor,
+                                  this.bufferSize=299,
+                                  this.height=250.0}) : super(key: key);
 
   final GravitySensor sensor;
   final int bufferSize;
   final double height;
+
+  final List<LineSeriesData> dataLine1 = List<LineSeriesData>();
+  final List<LineSeriesData> dataLine2 = List<LineSeriesData>();
+  final List<LineSeriesData> dataLine3 = List<LineSeriesData>();
 
   @override
   GravityCardState createState() => new GravityCardState();
@@ -58,22 +64,23 @@ class GravityCard extends StatefulWidget {
 
 class GravityCardState extends State<GravityCard> {
 
-  List<LineSeriesData> dataLine1 = List<LineSeriesData>();
-  List<LineSeriesData> dataLine2 = List<LineSeriesData>();
-  List<LineSeriesData> dataLine3 = List<LineSeriesData>();
-
   @override
   void initState() {
 
     super.initState();
     // set observer
     widget.sensor.onDataChanged.listen((event) {
+
       setState((){
         if(event!=null){
           DateTime.fromMicrosecondsSinceEpoch(event['timestamp']);
-          StreamLineSeriesChart.add(data:event['x'], into:dataLine1, id:"x", buffer: widget.bufferSize);
-          StreamLineSeriesChart.add(data:event['y'], into:dataLine2, id:"y", buffer: widget.bufferSize);
-          StreamLineSeriesChart.add(data:event['z'], into:dataLine3, id:"z", buffer: widget.bufferSize);
+          var buffer = widget.bufferSize;
+          double x = event['x'];
+          double y = event['y'];
+          double z = event['z'];
+          StreamLineSeriesChart.add(data:x, into:widget.dataLine1, id:"x", buffer: buffer);
+          StreamLineSeriesChart.add(data:y, into:widget.dataLine2, id:"y", buffer: buffer);
+          StreamLineSeriesChart.add(data:z, into:widget.dataLine3, id:"z", buffer: buffer);
         }
       });
     }, onError: (dynamic error) {
@@ -85,11 +92,16 @@ class GravityCardState extends State<GravityCard> {
 
   @override
   Widget build(BuildContext context) {
+    var data = StreamLineSeriesChart.createTimeSeriesData(
+        widget.dataLine1,
+        widget.dataLine2,
+        widget.dataLine3
+    );
     return new AwareCard(
       contentWidget: SizedBox(
           height:widget.height,
           width: MediaQuery.of(context).size.width*0.8,
-          child: new StreamLineSeriesChart(StreamLineSeriesChart.createTimeSeriesData(dataLine1, dataLine2, dataLine3)),
+          child: new StreamLineSeriesChart(data),
         ),
       title: "Gravity",
       sensor: widget.sensor
