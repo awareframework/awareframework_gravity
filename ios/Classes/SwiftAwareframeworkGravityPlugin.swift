@@ -35,7 +35,8 @@ public class SwiftAwareframeworkGravityPlugin: AwareFlutterPluginCore, FlutterPl
                                channelName: "awareframework_gravity/method")
         super.setEventChannels(with: registrar,
                           instance: instance,
-                          channelNames: ["awareframework_gravity/event"] )
+                          channelNames: ["awareframework_gravity/event",
+                                         "awareframework_gravity/event_on_data_changed"] )
     }
 
     public func onDataChanged(data: GravityData) {

@@ -23,10 +23,10 @@ class _MyAppState extends State<MyApp> {
 
     config = GravitySensorConfig()
       ..frequency = 100
-      ..dbType = 1
+      ..dbType = DatabaseType.DEFAULT
       ..debug = true;
 
-    sensor = new GravitySensor(config);
+    sensor = new GravitySensor.init(config);
 
     sensor.start();
   }

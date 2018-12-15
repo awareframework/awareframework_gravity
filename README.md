@@ -1,6 +1,8 @@
 # Aware Gravity
 
-TODO
+[![Build Status](https://travis-ci.org/awareframework/awareframework_gravity.svg?branch=master)](https://travis-ci.org/awareframework/awareframework_gravity)
+
+The gravity sensor measures the force of gravity applied to the sensor built-in into the device and provides a three dimensional vector indicating the direction and magnitude of gravity.
 
 ## Install the plugin into project
 1. Edit `pubspec.yaml`
@@ -19,10 +21,11 @@ import 'package:awareframework_core/awareframework_core.dart';
 ### gravity Sensor
 - `start()`
 - `stop()` 
-- `sync(force: Boolean)`
+- `sync(boolean force)`
 - `enable()`
 - `disable()`
 - `isEnable()`
+- `setLabel(String label)`
 
 ### Configuration Keys
 TODO
@@ -52,12 +55,12 @@ var config = GravitySensorConfig()
 // init sensor
 var sensor = new GravitySensor(config);
 
-void mathod(){
+void method(){
     /// start 
     sensor.start();
     
     /// set observer
-    sensor.onDataChanged.listen((Map<String,dynamic> result){
+    sensor.onDataChanged.listen((Gravity data){
       setState((){
         // Your code here
       });

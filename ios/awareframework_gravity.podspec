@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'awareframework_gravity'
-  s.version = '0.0.5'
+  s.version = '0.0.6'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
@@ -16,7 +16,7 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'awareframework_core'
-  s.dependency 'com.awareframework.ios.sensor.gravity', '~> 0.2.2'
+  s.dependency 'com.awareframework.ios.sensor.gravity', '~> 0.4.0'
 
   s.ios.deployment_target = '10.0'
 end
