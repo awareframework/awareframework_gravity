@@ -1,5 +1,5 @@
 name: awareframework_gravity
-description: The gravity sensor measures the force of gravity applied to the sensor built-in into the device and provides a three dimensional vector indicating the direction and magnitude of gravity
+description: The gravity sensor measures the force of gravity applied to the device.
 version: 0.0.6
 author: AWARE Mobile Context Instrumentation Middleware Framework <yuuki.nishiyama@oulu.fi>
 homepage: http://www.awareframework.com

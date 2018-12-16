@@ -21,7 +21,7 @@ import 'package:awareframework_core/awareframework_core.dart';
 ### gravity Sensor
 - `start()`
 - `stop()` 
-- `sync(boolean force)`
+- `sync(bool force)`
 - `enable()`
 - `disable()`
 - `isEnable()`
@@ -53,7 +53,7 @@ var config = GravitySensorConfig()
   ..label = "label";
 
 // init sensor
-var sensor = new GravitySensor(config);
+var sensor = new GravitySensor.init(config);
 
 void method(){
     /// start 

@@ -49,7 +49,7 @@ import 'package:flutter/material.dart';
 /// ```
 class GravitySensor extends AwareSensor {
   static const MethodChannel _gravityMethod = const MethodChannel('awareframework_gravity/method');
-  static const EventChannel  _gravityStream  = const EventChannel('awareframework_gravity/event');
+//  static const EventChannel  _gravityStream  = const EventChannel('awareframework_gravity/event');
 
   static const EventChannel  _onDataChangedStream  = const EventChannel('awareframework_gravity/event_on_data_changed');
 
